@@ -9,7 +9,7 @@
 #include "dvars.hpp"
 #include "structs.hpp"
 
-#include <utils/hook.hpp>
+#include "utils/hook.hpp"
 
 namespace dvars
 {
@@ -127,6 +127,7 @@ namespace dvars
 	utils::hook::detour dvar_register_float_hook;
 	utils::hook::detour dvar_register_int_hook;
 	utils::hook::detour dvar_register_vector2_hook;
+	utils::hook::detour dvar_set_server_command_hook;
 
 	game::dvar_t* dvar_register_bool(const char* name, bool value, unsigned int flags, const char* description)
 	{
@@ -136,6 +137,7 @@ namespace dvars
 			value = var->value;
 			flags = var->flags;
 			description = var->description.data();
+			client::CL_printf("Overriding bool dvar: %s\n", name);
 		}
 
 		return dvar_register_bool_hook.invoke<game::dvar_t*>(name, value, flags, description);
@@ -152,6 +154,7 @@ namespace dvars
 			max = var->max;
 			flags = var->flags;
 			description = var->description.data();
+			client::CL_printf("Overriding float dvar: %s\n", name);
 		}
 
 		return dvar_register_float_hook.invoke<game::dvar_t*>(name, value, min, max, flags, description);
@@ -168,6 +171,7 @@ namespace dvars
 			max = var->max;
 			flags = var->flags;
 			description = var->description.data();
+			client::CL_printf("Overriding int dvar: %s\n", name);
 		}
 
 		return dvar_register_int_hook.invoke<game::dvar_t*>(name, value, min, max, flags, description);
@@ -185,12 +189,13 @@ namespace dvars
 			max = var->max;
 			flags = var->flags;
 			description = var->description.data();
+			client::CL_printf("Overriding vector 2 dvar: %s\n", name);
 		}
 
 		return dvar_register_vector2_hook.invoke<game::dvar_t*>(name, x, y, min, max, flags, description);
 	}
 
-	void set_server_command_dvar(const char* dvar, const char* value)
+	void dvar_set_server_command(const char* dvar, const char* value)
 	{
 		client::CL_printf("Server attempted to change dvar: %s with value: %s\n", dvar, value);
 	}
@@ -201,7 +206,6 @@ namespace dvars
 		dvar_register_float_hook.create(0x004A5CF0, &dvar_register_float);
 		dvar_register_int_hook.create(0x0050C760, &dvar_register_int);
 		dvar_register_vector2_hook.create(0x048AFE0, &dvar_register_vector2);
-
-		utils::hook::call(0x0552320, set_server_command_dvar);
+		dvar_set_server_command_hook.create(0x0552320, &dvar_set_server_command);
 	}
 }

@@ -14,6 +14,7 @@ namespace dvars
 		void Dvar_RegisterFloat(const std::string& name, float value, float min, float max, const unsigned int flags, const std::string& description = "");
 		void Dvar_RegisterInt(const std::string& name, int value, int min, int max, const unsigned int flags, const std::string& description = "");
 		void Dvar_RegisterVector2(const std::string& name, float x, float y, float min, float max, const unsigned int flags, const std::string& description = "");
-		void doHooks();
 	}
+
+	void doHooks();
 }

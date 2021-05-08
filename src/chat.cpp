@@ -5,13 +5,13 @@
 // ========================================================
 
 #include "std_include.hpp"
-#include "Chat.hpp"
+#include "chat.hpp"
 
 volatile long isSpam = 0;
 
 namespace chat
 {
-	DWORD WINAPI spamChat(LPVOID lpParam)
+	DWORD WINAPI spamChat(LPVOID /*lpParam*/)
 	{
 		while (isSpam)
 		{

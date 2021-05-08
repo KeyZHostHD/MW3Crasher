@@ -1,8 +1,12 @@
+// ==================== MW3Crasher ========================
+// Project: https://github.com/diamante0018/MW3Crasher
+// Author: Diavolo (https://github.com/diamante0018)
+// License: GNU GPL v3.0
+// ========================================================
+
 #pragma once
 
 #include "windows.h"
-#include <WinSock2.h>
-#include <WS2tcpip.h>
 #include <cstdint>
 #include <stdio.h>
 #include <string>
@@ -13,5 +17,6 @@
 #include "crasher.hpp"
 #include "console.hpp"
 #include "patches.hpp"
+#include "dvars.hpp"
 
 using namespace std::literals;

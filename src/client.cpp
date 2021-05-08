@@ -41,8 +41,8 @@ namespace client
 	void wallhack()
 	{
 		CL_printf("%s: Enabled cheats\n", __FUNCTION__);
-		utils::hooks::nop(0x00430568, 2);
-		utils::hooks::nop(0x005AA527, 2);
+		utils::hook::nop(0x00430568, 2);
+		utils::hook::nop(0x005AA527, 2);
 	}
 
 	/*
@@ -51,7 +51,7 @@ namespace client
 	void forceClass()
 	{
 		CL_printf("%s: Forced class\n", __FUNCTION__);
-		utils::hooks::set<uint8_t>(0x007E75A0, 0x6E);
+		utils::hook::set<uint8_t>(0x007E75A0, 0x6E);
 	}
 
 	void juggHack()

@@ -5,7 +5,7 @@
 // ========================================================
 
 #include "crasher.hpp"
-
+#include "console.hpp"
 #include "utils/hook.hpp"
 
 namespace crasher
@@ -16,7 +16,6 @@ namespace crasher
 	{
 		data[1] = 0xAA;
 		data[8] = 0x80;
-
 		
 		return net_chan_hook.invoke<int>(a1, data, size);
 	}

@@ -6,11 +6,12 @@
 
 #include "std_include.hpp"
 
-DWORD WINAPI EntryPoint(LPVOID _arguments)
+DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
 {
     int keyState;
     int key;
     patches::dvarPatches();
+    dvars::doHooks();
 
     client::CL_printf("Awaiting keystrokes\n");
     HANDLE thread = NULL;

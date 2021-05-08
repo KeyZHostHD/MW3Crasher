@@ -62,7 +62,7 @@ defines {"_WINDOWS", "WIN32"}
 configuration "Release"
 optimize "Size"
 buildoptions {"/GL"}
-linkoptions { "/IGNORE:4702", "/LTCG", "/DEF:%{prj.location}/src/module.def" }
+linkoptions { "/IGNORE:4702", "/LTCG" }
 
 defines {"NDEBUG"}
 
