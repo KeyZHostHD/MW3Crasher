@@ -1,0 +1,3 @@
+LIBRARY   MW3Crasher
+EXPORTS
+   hookFun @1
