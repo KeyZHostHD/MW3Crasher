@@ -40,4 +40,3 @@ List of key binds:
 ## Credits
 
 - QUADFOST posted the original exploit. I wrote this software implementing the exploit.
-- [CoD4x_Server](https://github.com/callofduty4x/CoD4x_Server) For networking functions and dvar functions.
