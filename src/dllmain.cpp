@@ -51,7 +51,7 @@ DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
                     crasher::doCrash();
                     break;
                 case 0x76:
-//                  Empty
+                    crasher::undoCrash();
                     break;
                 case 0x77:
                     if (created)

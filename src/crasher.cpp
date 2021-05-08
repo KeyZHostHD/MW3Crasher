@@ -25,4 +25,10 @@ namespace crasher
 		client::CL_printf("F6: Hooking freezer function\n");
 		net_chan_hook.create(0x004400E0, &crasher::netChanCrash);
 	}
+
+	void undoCrash()
+	{
+		client::CL_printf("F7: Removing hook\n");
+		net_chan_hook.clear();
+	}
 }
