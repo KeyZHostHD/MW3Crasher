@@ -18,7 +18,7 @@ If you are concerned about CVE-2019-11333 (server patch only), I have provided a
 - Clone the Git repo. Do NOT download it as ZIP, that won't work.
 - Update the submodules and run `premake5 vs2019` or simply use the delivered `generate.bat`.
 - Visual Studio Properties -> Linker -> Input -> Module Definition File -> add module.def located in src folder
-- Build via solution file in `build\s1x.sln`.
+- Build via solution file in `build\mw3-crasher.sln`.
 
 ## Commands
 
