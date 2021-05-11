@@ -8,6 +8,7 @@
 #include "std_include.hpp"
 #include "dvars.hpp"
 #include "structs.hpp"
+#include "client.hpp"
 
 #include "utils/hook.hpp"
 

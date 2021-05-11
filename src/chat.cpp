@@ -6,6 +6,7 @@
 
 #include "std_include.hpp"
 #include "chat.hpp"
+#include "client.hpp"
 
 volatile long isSpam = 0;
 
@@ -23,6 +24,7 @@ namespace chat
 			Sleep(1000);
 		}
 
+		client::CL_printf("%s: Exit\n", __FUNCTION__);
 		return 0;
 	}
 }

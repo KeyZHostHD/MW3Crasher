@@ -84,4 +84,36 @@ namespace game
 		dvar_t* hashNext;
 	};
 
+	template <typename T>
+	class symbol
+	{
+	public:
+		symbol(const size_t sp_address, const size_t mp_address)
+			: sp_object_(reinterpret_cast<T*>(sp_address))
+			, mp_object_(reinterpret_cast<T*>(mp_address))
+		{
+		}
+
+		T* get() const
+		{
+			return mp_object_;
+		}
+
+		operator T* () const
+		{
+			return this->get();
+		}
+
+		T* operator->() const
+		{
+			return this->get();
+		}
+
+	private:
+		T* sp_object_;
+		T* mp_object_;
+	};
+
 }
+
+#include "symbols.hpp"

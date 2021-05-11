@@ -9,7 +9,6 @@
 namespace client
 {
 	void CL_printf(const char* fmt, ...);
-	void sendUICMD(const char* command);
 	void wallhack();
 	void forceClass();
 	void juggHack();

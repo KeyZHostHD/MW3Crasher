@@ -11,12 +11,6 @@
 #include <stdio.h>
 #include <string>
 #include <memory>
-
-#include "chat.hpp"
-#include "client.hpp"
-#include "crasher.hpp"
-#include "console.hpp"
-#include "patches.hpp"
-#include "dvars.hpp"
+#include <mutex>
 
 using namespace std::literals;

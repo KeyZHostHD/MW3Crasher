@@ -8,7 +8,6 @@
 
 namespace crasher
 {
-	int netChanCrash(int a1, unsigned char* data, int size);
 	void doCrash();
 	void undoCrash();
 }

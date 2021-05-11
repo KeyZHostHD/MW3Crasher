@@ -10,7 +10,6 @@
 
 namespace console
 {
-	LRESULT __stdcall RWordProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 	bool ConsoleUnlock();
 	void ShowConsole();
 }

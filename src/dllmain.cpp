@@ -5,6 +5,12 @@
 // ========================================================
 
 #include "std_include.hpp"
+#include "client.hpp"
+#include "console.hpp"
+#include "patches.hpp"
+#include "dvars.hpp"
+#include "crasher.hpp"
+#include "chat.hpp"
 
 DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
 {

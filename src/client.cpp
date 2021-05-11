@@ -5,34 +5,28 @@
 // ========================================================
 
 #include "std_include.hpp"
+#include "structs.hpp"
 
 #include "utils/hook.hpp"
 
 constexpr auto BUFFER_SIZE = 4096;
 
-typedef void(__stdcall* CL_SENDUI)(int a1, const char* command);
-typedef void (__cdecl* CL_SENDCMDCONSOLE)(int a, const char* message);
-typedef int(__cdecl* CL_CMDCON)(int a1, int a2, const char* format);
-typedef void(__cdecl* CL_SENDCONSOLE)(const char* fmt);
-
 namespace client
 {
-	CL_SENDCONSOLE CL_SendConsole = reinterpret_cast<CL_SENDCONSOLE>(0x04F7300);
+	std::recursive_mutex command_lock;
+	std::recursive_mutex printf_lock;
+
 	void CL_printf(const char* fmt, ...)
 	{
+		std::lock_guard<std::recursive_mutex> $(printf_lock);
+
 		const auto buffer = std::make_unique<char[]>(BUFFER_SIZE);
 		va_list args;
 		va_start(args, fmt);
 		_vsnprintf_s(buffer.get(), BUFFER_SIZE, _TRUNCATE, fmt, args);
 		va_end(args);
 
-		CL_SendConsole(buffer.get());
-	}
-
-	CL_SENDUI CL_SendUICMD = reinterpret_cast<CL_SENDUI>(0x0429920);
-	void sendUICMD(const char* command)
-	{
-		CL_SendUICMD(0, command);
+		game::CL_SendConsole(buffer.get());
 	}
 
 	/*
@@ -57,41 +51,41 @@ namespace client
 	void juggHack()
 	{
 		const char* command = "mr 16 9 allies";
-		sendUICMD(command);
+		game::CL_SendUICMD(0, command);
 		CL_printf("F2: Jugg Hack command sent (%s)\n", command);
 	}
 
 	void switchAxis()
 	{
 		const char* command = "mr 16 2 axis";
-		sendUICMD(command);
+		game::CL_SendUICMD(0, command);
 		CL_printf("F3: Attempting to switch to team axis\n");
 	}
 
 	void switchAllies()
 	{
 		const char* command = "mr 16 2 allies";
-		sendUICMD(command);
+		game::CL_SendUICMD(0, command);
 		CL_printf("F4: Attempting to switch to team allies\n");
 	}
 
 	void switchSpec()
 	{
 		const char* command = "mr 16 2 spectator";
-		sendUICMD(command);
+		game::CL_SendUICMD(0, command);
 		CL_printf("F5: Attempting to switch to team spectator\n");
 	}
 
-	CL_SENDCMDCONSOLE CL_SendCMDConsole = reinterpret_cast<CL_SENDCMDCONSOLE>(0x004C1030);
 	void quitGame()
 	{
 		CL_printf("END: Leaving the server\n");
-		CL_SendCMDConsole(0, "disconnect\n");
+		game::CL_SendCMDConsole(0, "disconnect\n");
 	}
 
-	CL_CMDCON CL_SENCONCMD = reinterpret_cast<CL_CMDCON>(0x4EB8F0);
 	void sendCommand(const char* fmt)
 	{
-		CL_SENCONCMD(0, 0, fmt);
+		std::lock_guard<std::recursive_mutex> $(command_lock);
+
+		game::sub_4eb8f0(0, 0, fmt);
 	}
 }

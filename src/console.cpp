@@ -22,8 +22,8 @@ namespace console
     }
 
     bool ConsoleUnlock()
-//      If it returns true -> Never call again
     {
+//      If it returns true -> Never call again
         originalCallback = reinterpret_cast<WNDPROC>(SetWindowLongA(*reinterpret_cast<HWND*>(mainHwndAddr), GWL_WNDPROC, reinterpret_cast<LONG>(RWordProc)));
         if (originalCallback == nullptr)
         {

@@ -6,6 +6,8 @@
 
 #include "crasher.hpp"
 #include "console.hpp"
+#include "client.hpp"
+
 #include "utils/hook.hpp"
 
 namespace crasher
