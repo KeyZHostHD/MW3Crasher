@@ -16,5 +16,5 @@ namespace client
 	void switchAllies();
 	void switchSpec();
 	void quitGame();
-	void sendCommand(const char* fmt);
+	void sub_4eb8f0Wrapper(const char* fmt);
 }

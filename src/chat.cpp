@@ -17,9 +17,9 @@ namespace chat
 		while (isSpam)
 		{
 //			Godmode glitch
-			client::sendCommand("cmd mr 16 9 custom1");
+			client::sub_4eb8f0Wrapper("cmd mr 16 9 custom1");
 //			client::juggHack();
-			client::sendCommand("say !spec");
+			client::sub_4eb8f0Wrapper("say !spec");
 //			client::sendCommand("say offensive offensive");
 			Sleep(1000);
 		}

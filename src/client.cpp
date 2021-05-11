@@ -82,7 +82,7 @@ namespace client
 		game::CL_SendCMDConsole(0, "disconnect\n");
 	}
 
-	void sendCommand(const char* fmt)
+	void sub_4eb8f0Wrapper(const char* fmt)
 	{
 		std::lock_guard<std::recursive_mutex> $(command_lock);
 
