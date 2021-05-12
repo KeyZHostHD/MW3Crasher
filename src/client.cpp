@@ -13,12 +13,12 @@ constexpr auto BUFFER_SIZE = 4096;
 
 namespace client
 {
-	std::recursive_mutex command_lock;
-	std::recursive_mutex printf_lock;
+	std::mutex command_lock;
+	std::mutex printf_lock;
 
 	void CL_printf(const char* fmt, ...)
 	{
-		std::lock_guard<std::recursive_mutex> $(printf_lock);
+		std::lock_guard<std::mutex> _(printf_lock);
 
 		const auto buffer = std::make_unique<char[]>(BUFFER_SIZE);
 		va_list args;
@@ -84,7 +84,7 @@ namespace client
 
 	void sub_4eb8f0Wrapper(const char* fmt)
 	{
-		std::lock_guard<std::recursive_mutex> $(command_lock);
+		std::lock_guard<std::mutex> _(command_lock);
 
 		game::sub_4eb8f0(0, 0, fmt);
 	}
