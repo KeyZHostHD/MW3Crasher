@@ -4,6 +4,7 @@
 // License: GNU GPL v3.0
 // ========================================================
 
+#include "std_include.hpp"
 #include "console.hpp"
 
 static WNDPROC originalCallback = nullptr;
