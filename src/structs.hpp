@@ -8,7 +8,7 @@
 
 namespace game
 {
-    enum DvarFlags
+	enum DvarFlags
 	{
 		DVAR_FLAG_NONE = 0,
 		DVAR_FLAG_SAVED = 0x1,
@@ -19,7 +19,7 @@ namespace game
 		DVAR_FLAG_READ = 0x2000,
 	};
 
-    typedef float vec_t;
+	typedef float vec_t;
 	typedef vec_t vec2_t[2];
 	typedef vec_t vec3_t[3];
 	typedef vec_t vec4_t[4];
@@ -40,14 +40,14 @@ namespace game
 		unsigned int unsignedInt;
 		float value;
 		vec4_t vector;
-		const char* string;
+		const char *string;
 		ucolor_t color;
 	};
 
 	struct enum_limit
 	{
 		int stringCount;
-		const char** strings;
+		const char **strings;
 	};
 
 	struct int_limit
@@ -72,7 +72,7 @@ namespace game
 
 	struct dvar_t
 	{
-		const char* name;
+		const char *name;
 		unsigned int flags;
 		char type;
 		bool modified;
@@ -80,8 +80,8 @@ namespace game
 		DvarValue latched;
 		DvarValue reset;
 		DvarLimits domain;
-		bool(__cdecl* domainFunc)(dvar_t*, DvarValue);
-		dvar_t* hashNext;
+		bool(__cdecl *domainFunc)(dvar_t *, DvarValue);
+		dvar_t *hashNext;
 	};
 
 	template <typename T>
@@ -89,29 +89,28 @@ namespace game
 	{
 	public:
 		symbol(const size_t sp_address, const size_t mp_address)
-			: sp_object_(reinterpret_cast<T*>(sp_address))
-			, mp_object_(reinterpret_cast<T*>(mp_address))
+			: sp_object_(reinterpret_cast<T *>(sp_address)), mp_object_(reinterpret_cast<T *>(mp_address))
 		{
 		}
 
-		T* get() const
+		T *get() const
 		{
 			return mp_object_;
 		}
 
-		operator T* () const
+		operator T *() const
 		{
 			return this->get();
 		}
 
-		T* operator->() const
+		T *operator->() const
 		{
 			return this->get();
 		}
 
 	private:
-		T* sp_object_;
-		T* mp_object_;
+		T *sp_object_;
+		T *mp_object_;
 	};
 
 }
