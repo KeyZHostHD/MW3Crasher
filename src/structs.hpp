@@ -234,7 +234,6 @@ namespace game
 		};
 
 		static_assert(sizeof(cookieAckPacket) == 177);
-		static_assert(offsetof(cookieAckPacket, ECCkey_exportkey) == 77);
 	}
 
 #pragma pack(pop)
