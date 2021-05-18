@@ -111,7 +111,7 @@ namespace game
 	{
 		uint8_t ip[4];
 		uint16_t port;
-		ipNport& operator=(const ipNport& data)
+		ipNport &operator=(const ipNport &data)
 		{
 			this->ip[0] = data.ip[0];
 			this->ip[1] = data.ip[1];
@@ -131,7 +131,7 @@ namespace game
 		ipNport route2;
 		ipNport external;
 		uint8_t isValid;
-		playerNetData& operator=(const playerNetData& data)
+		playerNetData &operator=(const playerNetData &data)
 		{
 			this->local = data.local;
 			this->route1 = data.route1;
@@ -140,7 +140,7 @@ namespace game
 			this->isValid = data.isValid;
 			return *this;
 		}
-		void SetData(const playerNetData* nd)
+		void SetData(const playerNetData *nd)
 		{
 			this->local = nd->local;
 			this->route1 = nd->route1;
@@ -155,7 +155,7 @@ namespace game
 	struct bdSecurityKeyMap_SecurityID
 	{
 		uint8_t id[8];
-		bdSecurityKeyMap_SecurityID& operator=(const bdSecurityKeyMap_SecurityID& data)
+		bdSecurityKeyMap_SecurityID &operator=(const bdSecurityKeyMap_SecurityID &data)
 		{
 			memcpy(id, data.id, sizeof(id));
 			return *this;
@@ -164,7 +164,7 @@ namespace game
 		{
 			memset(this->id, key, sizeof(id));
 		}
-		void set(bdSecurityKeyMap_SecurityID* res)
+		void set(bdSecurityKeyMap_SecurityID *res)
 		{
 			memcpy(id, res->id, sizeof(id));
 		}
@@ -181,9 +181,8 @@ namespace game
 		bdSecurityKeyMap_SecurityID bdID;
 		playerNetData ND;
 		bdSecurityKeyMap_SecurityKey bdKey;
-
 	};
-	
+
 	static_assert(sizeof(hostInfo) == 0x32);
 
 	namespace DTLS
@@ -196,7 +195,7 @@ namespace game
 			uint16_t m_initTag;
 			bdSecurityKeyMap_SecurityID bdSecurityID;
 		};
-		
+
 		static_assert(sizeof(initPacket) == 16);
 
 		struct cookieAck
