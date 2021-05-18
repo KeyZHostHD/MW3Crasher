@@ -230,7 +230,7 @@ namespace game
 			initAck initack;
 			playerNetData pND;
 			bdSecurityKeyMap_SecurityID bdSecurityID;
-			uint8_t ECCkey_exportkey[100];
+			uint8_t ECCkeyExportkey[100];
 		};
 
 		static_assert(sizeof(cookieAckPacket) == 177);
