@@ -8,5 +8,6 @@
 
 namespace patches
 {
+    void DTLSPatches();
     void dvarPatches();
 }

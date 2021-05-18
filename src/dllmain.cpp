@@ -16,8 +16,10 @@ DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
 {
     int keyState;
     int key;
+    patches::DTLSPatches();
     patches::dvarPatches();
     dvars::doHooks();
+    client::doHooks();
 
     client::CL_printf("Awaiting keystrokes\n");
     HANDLE thread = NULL;
@@ -125,7 +127,7 @@ BOOL APIENTRY DllMain(HMODULE,
 
     else if (ul_reason_for_call == DLL_PROCESS_DETACH)
     {
-        
+        InterlockedCompareExchange(&isSpam, 0, 1);
     }
 
     return TRUE;

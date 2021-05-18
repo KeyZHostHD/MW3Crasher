@@ -8,8 +8,19 @@
 #include "dvars.hpp"
 #include "structs.hpp"
 
+#include "utils/hook.hpp"
+
 namespace patches
 {
+    void DTLSPatches()
+    {
+        utils::hook::set<uint8_t>(0x06EA960, 0x55);
+        utils::hook::set<uint8_t>(0x06EA961, 0x8B);
+        utils::hook::set<uint8_t>(0x06EA962, 0xEC);
+        utils::hook::set<uint8_t>(0x06EA963, 0x81);
+        utils::hook::set<uint8_t>(0x06EA964, 0xEC);
+    }
+
     void dvarPatches()
     {
         dvars::override::Dvar_RegisterBool("jump_slowdownEnable", false, game::DVAR_FLAG_SAVED);

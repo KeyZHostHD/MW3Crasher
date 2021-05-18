@@ -13,6 +13,8 @@ constexpr auto BUFFER_SIZE = 4096;
 
 namespace client
 {
+	utils::hook::detour bdLogMessage_hook;
+
 	std::mutex command_lock;
 	std::mutex printf_lock;
 
@@ -87,5 +89,23 @@ namespace client
 		std::lock_guard<std::mutex> _(command_lock);
 
 		game::sub_4eb8f0(0, 0, fmt);
+	}
+
+	void bdLogMessage_stub(int a1, const char* a2, const char* a3, const char* a4, const char* a5, int a6, const char* fmt, ...)
+	{
+		char buf[512]{0};
+
+		va_list args;
+		va_start(args, fmt);
+		_vsnprintf_s(buf, sizeof(buf), _TRUNCATE, fmt, args);
+
+		game::CL_SendConsole(buf);
+
+		bdLogMessage_hook.invoke<void>(a1, a2, a3, a4, a5, a6, "%s", buf);
+	}
+
+	void doHooks()
+	{
+		bdLogMessage_hook.create(0x6EA960, &bdLogMessage_stub);
 	}
 }

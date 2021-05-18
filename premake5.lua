@@ -54,7 +54,7 @@ editandcontinue "Off"
 warnings "Extra"
 characterset "ASCII"
 
-flags {"NoIncrementalLink", "NoMinimalRebuild", "MultiProcessorCompile" }
+flags {"NoIncrementalLink", "NoMinimalRebuild", "MultiProcessorCompile", "No64BitChecks"}
 
 configuration "windows"
 defines {"_WINDOWS", "WIN32"}

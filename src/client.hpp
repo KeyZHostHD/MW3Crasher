@@ -17,4 +17,5 @@ namespace client
 	void switchSpec();
 	void quitGame();
 	void sub_4eb8f0Wrapper(const char* fmt);
+	void doHooks();
 }
