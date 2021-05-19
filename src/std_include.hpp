@@ -14,6 +14,7 @@
 #include <string>
 #include <memory>
 #include <mutex>
+#include <vector>
 #pragma comment (lib, "Ws2_32.lib")
 
 using namespace std::literals;

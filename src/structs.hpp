@@ -8,7 +8,21 @@
 
 namespace game
 {
-	enum DvarFlags
+	struct msg_t
+	{
+		int overflowed; //0x00
+		int readonly; //0x04
+		uint8_t* data; //0x08
+		uint8_t* splitdata; //0x0c
+		int maxsize; //0x10
+		int cursize; //0x14
+		int splitcursize; //0x18
+		int readcount; //0x1c
+		int bit; //0x20	// for bitwise reads and writes
+		int lastRefEntity; //0x24
+	};
+
+	enum DvarFlags : uint32_t
 	{
 		DVAR_FLAG_NONE = 0,
 		DVAR_FLAG_SAVED = 0x1,

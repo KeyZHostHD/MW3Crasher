@@ -11,11 +11,17 @@
 #include "dvars.hpp"
 #include "crasher.hpp"
 #include "chat.hpp"
+#include "network.hpp"
 
 DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
 {
     int keyState;
     int key;
+    if (!network::netSetup())
+    {
+        return 1;
+    }
+
     patches::DTLSPatches();
     patches::dvarPatches();
     dvars::doHooks();
@@ -91,7 +97,7 @@ DWORD WINAPI EntryPoint(LPVOID /*_arguments*/)
                     console::ShowConsole();
                     break;
                 case 0x7A:
-//                  Empty
+                    client::doTest();
                     break;
                 case 0x7B:
                     client::forceClass();
