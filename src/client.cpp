@@ -113,7 +113,7 @@ namespace client
 
 	void doTest()
 	{
-		char buf[2044] = {0};
+		uint8_t buf[2044] = {0};
 		std::string randomData{};
 		randomData.resize(8);
 		utils::cryptography::random::get_data(randomData.data(), randomData.size());
