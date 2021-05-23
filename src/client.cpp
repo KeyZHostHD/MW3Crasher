@@ -113,6 +113,7 @@ namespace client
 
 	void doTest()
 	{
+//		Steam test
 		uint8_t buf[2044] = {0};
 		std::string randomData{};
 		randomData.resize(8);
