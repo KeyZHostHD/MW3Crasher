@@ -91,7 +91,7 @@ namespace network
 		return true;
 	}
 
-	int NET_SendPacket(int length, const void *data, game::netadr_s *to)
+	int NET_SendPacket(int length, const void *data, game::netadr_s *to, uint16_t defaultPort)
 	{
 		if (to->type != 4)
 		{
@@ -105,7 +105,7 @@ namespace network
 		auto socket = *reinterpret_cast<SOCKET *>(0x05A861EC);
 		s.sin_family = AF_INET;
 		s.sin_addr.s_addr = *(int *)&to->ip;
-		s.sin_port = to->port;
+		s.sin_port = (defaultPort) ? htons(defaultPort) : htons(to->port);
 
 		ret = sendto(socket, (char*)data, length, 0, (sockaddr*) &s, sizeof(sockaddr_in));
 		if (ret == SOCKET_ERROR)
@@ -113,22 +113,26 @@ namespace network
 			client::CL_printf("Socket error\n");
 		}
 
+		client::CL_printf("NET_SendPacket: Sent data to: %s\n", net_adr_to_string(to));
 		return ret;
 	}
 
-	void NET_OutOfBandPrint(game::netadr_s *adr, void *data, int length)
+	void NET_OutOfBandPrint(game::netadr_s *adr, uint8_t *data, int length)
 	{
-		const auto buffer = std::make_unique<char[]>(MAX_MSGLEN);
+		const auto buffer = std::make_unique<uint8_t[]>(MAX_MSGLEN);
 
-		// set the header
-		buffer.get()[0] = -1;
-		buffer.get()[1] = -1;
-		buffer.get()[2] = -1;
-		buffer.get()[3] = -1;
+//		set the header
+		buffer.get()[0] = 0xFF;
+		buffer.get()[1] = 0xFF;
+		buffer.get()[2] = 0xFF;
+		buffer.get()[3] = 0xFF;
 
-		memcpy(buffer.get() + 4, data, length);
+		for (int i = 0; i < length; i++)
+		{
+			buffer.get()[i + 4] = data[i];
+		}
 
-		// send the datagram
+//		send the datagram
 		NET_SendPacket(length + 4, buffer.get(), adr);
 	}
 }

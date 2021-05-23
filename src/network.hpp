@@ -6,8 +6,8 @@ namespace network
 	bool are_addresses_equal(const game::netadr_s &a, const game::netadr_s &b);
 	const char *net_adr_to_string(const game::netadr_s* a);
 	bool netSetup();
-	int NET_SendPacket(int length, const void *data, game::netadr_s *to);
-	void NET_OutOfBandPrint(game::netadr_s *adr, void *data, int length);
+	int NET_SendPacket(int length, const void *data, game::netadr_s *to, uint16_t defaultPort = 0);
+	void NET_OutOfBandPrint(game::netadr_s* adr, uint8_t* data, int length);
 }
 
 inline bool operator==(const game::netadr_s &a, const game::netadr_s &b)
