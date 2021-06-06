@@ -27,7 +27,7 @@ namespace client
 		char buffer[BUFFER_SIZE] = {0};
 		va_list args;
 		va_start(args, fmt);
-		_vsnprintf_s(buffer, BUFFER_SIZE, _TRUNCATE, fmt, args);
+		vsnprintf_s(buffer, BUFFER_SIZE, _TRUNCATE, fmt, args);
 		va_end(args);
 
 		game::CL_SendConsole(buffer);
@@ -95,7 +95,7 @@ namespace client
 
 	void bdLogMessage_stub(int a1, const char *a2, const char *a3, const char *a4, const char *a5, int a6, const char *fmt, ...)
 	{
-		char buf[512]{0};
+		char buf[512] = {0};
 
 		va_list args;
 		va_start(args, fmt);
