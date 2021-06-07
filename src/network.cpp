@@ -106,7 +106,7 @@ namespace network
 		}
 
 		auto ret{SOCKET_ERROR};
-		struct sockaddr_in s{};
+		sockaddr_in s{};
 		memset(&s, 0, sizeof(sockaddr_in));
 		auto socket = *reinterpret_cast<SOCKET *>(0x05A861EC);
 		s.sin_family = AF_INET;
@@ -135,7 +135,8 @@ namespace network
 
 		for (int i = 0; i < length; i++)
 		{
-			buffer.get()[i + 4] = data[i];
+//			This is how data should be encrypted
+			buffer.get()[i + 4] = data[i] ^ '1';
 		}
 
 //		send the datagram

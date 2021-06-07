@@ -21,4 +21,6 @@ namespace game
     WEAK symbol<void(game::msg_t* msg, void* data, int length)> MSG_WriteData{0, 0x04F8C20};
     WEAK symbol<void(int sock, game::netadr_s to, void* data, int length)> NET_OutOfBandPrint{0, 0x04639C0};
     WEAK symbol<uint64_t()> sub_4a4050{0, 0x04A4050};
+    WEAK symbol<void(void* a1, void* a2, uint32_t a3, uint32_t a4)> bdDTLSAssociation_sendData{0, 0x06E6210};
+    WEAK symbol<void(SOCKET socket, uint32_t IP, uint16_t port, char* buf, int len)> bdPlatformSocket_sendTo{0, 0x06EAD40};
 }

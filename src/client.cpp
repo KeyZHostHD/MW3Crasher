@@ -16,6 +16,7 @@
 namespace client
 {
 	utils::hook::detour bdLogMessage_hook;
+	utils::hook::detour bdPlatformSocket_sendTo_hook;
 
 	std::mutex command_lock;
 	std::mutex printf_lock;
@@ -99,16 +100,22 @@ namespace client
 
 		va_list args;
 		va_start(args, fmt);
-		_vsnprintf_s(buf, sizeof(buf), _TRUNCATE, fmt, args);
+		vsnprintf_s(buf, sizeof(buf), _TRUNCATE, fmt, args);
 
 		game::CL_SendConsole(buf);
 
 		bdLogMessage_hook.invoke<void>(a1, a2, a3, a4, a5, a6, "%s", buf);
 	}
 
+	void bdPlatformSocket_sendTo(SOCKET socket, uint32_t IP, uint16_t port, char *buf, int len)
+	{
+		bdPlatformSocket_sendTo_hook.invoke<void>(socket, IP, port, buf, len);
+	}
+
 	void doHooks()
 	{
 		bdLogMessage_hook.create(0x6EA960, &bdLogMessage_stub);
+		bdPlatformSocket_sendTo_hook.create(0x06EAD40, &bdPlatformSocket_sendTo);
 	}
 
 	void doTest()
